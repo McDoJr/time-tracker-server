@@ -61,9 +61,9 @@ app.post("/api/select", async (req, res) => {
         if (offset) sql += ` OFFSET ${offset}`;
 
         const [rows] = await pool.query(sql, values);
-        res.json({data: rows, error: null});
+        res.json({ data: rows });
     } catch (error) {
-        res.status(500).json({ data: null, error: error.message });
+        res.status(500).json({ error: error.message });
     }
 });
 
@@ -82,7 +82,7 @@ app.post("/api/insert", async (req, res) => {
 
         notifyClients("insert", table, newRow); // Emit with correct data
 
-        res.json({ message: "Data inserted successfully", insertedId, newRow });
+        res.json({ message: "Data inserted successfully", data: newRow });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
