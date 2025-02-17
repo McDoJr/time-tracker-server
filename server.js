@@ -20,8 +20,8 @@ const pool = mysql.createPool({
 });
 
 // Emit changes when database is updated
-async function notifyClients(event, table, data) {
-    io.emit("db_change", { event, table, data });
+async function notifyClients(event, table, payload) {
+    io.emit("db_change", { event, table, payload });
 }
 
 // Get data
