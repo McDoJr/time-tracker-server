@@ -82,6 +82,8 @@ app.post("/api/insert", async (req, res) => {
 
         notifyClients("insert", table, newRow); // Emit with correct data
 
+        console.log(newRow);
+
         res.json({ message: "Data inserted successfully", data: newRow });
     } catch (error) {
         res.status(500).json({ error: error.message });
