@@ -3,6 +3,7 @@ const mysql = require("mysql2/promise");
 const cors = require("cors");
 const { Server } = require("socket.io");
 const http = require("http");
+require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
@@ -12,10 +13,10 @@ app.use(express.json());
 app.use(cors());
 
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'dtr'
+    host: process.env.HOST,
+    user: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
 });
 
 // Emit changes when database is updated
@@ -155,4 +156,6 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(3000, () => console.log("Server running on port 3000"));
+const PORT = process.env.PORT;
+
+server.listen(PORT, () => console.log("Server running on port 3000"));
