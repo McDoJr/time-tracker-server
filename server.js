@@ -80,7 +80,7 @@ app.post("/api/insert", async (req, res) => {
 
         const newRow = { id: insertedId, ...data }; // Include the ID in the response
 
-        notifyClients("insert", table, newRow); // Emit with correct data
+        notifyClients("insert", table, { new: newRow }); // Emit with correct data
 
         console.log(newRow);
 
